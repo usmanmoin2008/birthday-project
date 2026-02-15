@@ -4,11 +4,12 @@
 
 /* Font Loader */
 @font-face {
-    font-family: "RunethiaCustom";
-    src: url("./Runethia.otf") format("opentype");
-    font-display: swap;
+    font-family: "RUNE";
+    src: url("Runethia.otf") format("opentype");
 }
-
+*{
+    font-family: "RUNE" !important;
+}
 /* Root */
 * {
     margin: 0;
@@ -19,7 +20,6 @@
 html, body {
     width: 100%;
     height: 100%;
-    font-family: "RunethiaCustom", cursive;
     overflow-x: hidden;
     background: radial-gradient(circle at top, #3b1366, #1a062b);
 }
@@ -68,7 +68,6 @@ body::before {
     cursor: pointer;
     backdrop-filter: blur(10px);
     transition: all .5s ease;
-    font-family: "RunethiaCustom", cursive;
 }
 
 .btn:hover {
