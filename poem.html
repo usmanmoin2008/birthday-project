@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Eman ✨</title>
+
+<style>
+/* ================= FONT ================= */
+@font-face {
+    font-family: 'Galviane';
+    src: url('fonts/Galviane.otf') format('opentype');
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ================= BODY ================= */
+body{
+    font-family: 'Galviane', serif;
+    min-height:100vh;
+    background: radial-gradient(circle at top, #2b124f, #12001f);
+    color:#f5e9ff;
+    overflow-x:hidden;
+}
+
+/* ================= STARRY BACKGROUND ================= */
+.stars{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:transparent;
+    z-index:-1;
+    overflow:hidden;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation: twinkle 2s infinite ease-in-out alternate;
+}
+
+@keyframes twinkle{
+    0%{opacity:0.2; transform:scale(0.8);}
+    100%{opacity:1; transform:scale(1.6);}
+}
+
+/* ================= CONTAINER ================= */
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:100px 20px 150px;
+}
+
+/* ================= TEXT BLOCKS ================= */
+.block{
+    margin:80px 0;
+    font-size:1.4rem;
+    line-height:1.9;
+    text-align:center;
+    opacity:0;
+    transform:translateY(30px);
+    animation: fadeUp 1.5s ease forwards;
+}
+
+.block:nth-child(1){animation-delay:0.2s;}
+.block:nth-child(2){animation-delay:0.4s;}
+.block:nth-child(3){animation-delay:0.6s;}
+.block:nth-child(4){animation-delay:0.8s;}
+.block:nth-child(5){animation-delay:1s;}
+.block:nth-child(6){animation-delay:1.2s;}
+
+@keyframes fadeUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ================= NAME STYLE ================= */
+.name{
+    color:#ffd6ff;
+    font-size:2rem;
+    letter-spacing:2px;
+}
+
+/* ================= MUSIC BUTTON ================= */
+.music-btn{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.3);
+    padding:12px 18px;
+    border-radius:50px;
+    color:white;
+    cursor:pointer;
+    font-size:0.9rem;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    transition:0.4s;
+    z-index:10;
+}
+
+.music-btn:hover{
+    background:rgba(255,255,255,0.25);
+    transform:scale(1.05);
+}
+
+/* ================= TRIPLE TAP BUTTON ================= */
+.tap-box{
+    margin-top:120px;
+    text-align:center;
+}
+
+.tap-btn{
+    margin-top:30px;
+    padding:18px 40px;
+    font-size:1.1rem;
+    border-radius:50px;
+    border:none;
+    cursor:pointer;
+    background:linear-gradient(135deg,#ffb3ff,#ffd6ff);
+    color:#3a003a;
+    font-family:'Galviane', serif;
+    transition:0.4s;
+}
+
+.tap-btn:hover{
+    transform:scale(1.05);
+}
+
+.tap-text{
+    margin-top:20px;
+    font-size:1.1rem;
+    opacity:0.9;
+}
+
+/* ================= TRANSITION FADE ================= */
+.fade-out{
+    animation:fadeOut 1.5s ease forwards;
+}
+
+@keyframes fadeOut{
+    to{opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" src="vertigo.mp3"></audio>
+
+<div class="music-btn" onclick="toggleMusic()">
+    🎵 Play Music
+</div>
+
+<div class="container">
+
+    <div class="block">
+        Today isn’t just a date on a calendar.  
+        It’s a reminder that someone special exists in this world.
+    </div>
+
+    <div class="block">
+        <span class="name">Eman</span>,  
+        may your days be calm, your nights be peaceful,  
+        and your life be filled with moments that make you smile naturally.
+    </div>
+
+    <div class="block">
+        Not loud wishes.  
+        Not dramatic lines.  
+        Just genuine energy for a genuinely kind soul.
+    </div>
+
+    <div class="block">
+        May your journey be smooth,  
+        your goals feel closer,  
+        and your heart stay light.
+    </div>
+
+    <div class="block">
+        Some people bring noise.  
+        Some bring chaos.  
+        Some just bring a good presence.  
+        You feel like the third kind.
+    </div>
+
+    <div class="block">
+        Happy Birthday, <span class="name">Eman</span> 🎂  
+        May life treat you gently.
+    </div>
+
+    <!-- TRIPLE TAP SECTION -->
+    <div class="tap-box">
+        <div class="tap-text" id="tapText">Tap to continue ✨</div>
+        <button class="tap-btn" onclick="tapLogic()">Tap Me 🐾</button>
+    </div>
+
+</div>
+
+<script>
+/* ================= STARS ================= */
+const starsContainer = document.getElementById('stars');
+for(let i=0;i<120;i++){
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.top = Math.random()*100 + '%';
+    star.style.left = Math.random()*100 + '%';
+    star.style.animationDuration = (1 + Math.random()*3) + 's';
+    starsContainer.appendChild(star);
+}
+
+/* ================= MUSIC ================= */
+let playing = false;
+const music = document.getElementById('bgMusic');
+
+function toggleMusic(){
+    if(!playing){
+        music.play();
+        playing = true;
+    }else{
+        music.pause();
+        playing = false;
+    }
+}
+
+/* ================= TRIPLE TAP LOGIC ================= */
+let taps = 0;
+const tapText = document.getElementById('tapText');
+
+function tapLogic(){
+    taps++;
+
+    if(taps === 1){
+        tapText.innerHTML = "Your tap feels good ✨<br>Tap again 💗";
+    }
+    else if(taps === 2){
+        tapText.innerHTML = "Yummy 😋<br>One more tap 💞";
+    }
+    else if(taps === 3){
+        document.body.classList.add('fade-out');
+        setTimeout(()=>{
+            window.location.href = "transition.html";
+        },1500);
+    }
+}
+</script>
+
+</body>
+</html>
