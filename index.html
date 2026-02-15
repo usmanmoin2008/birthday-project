@@ -1,191 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css?v=999">
 <meta charset="UTF-8">
-<title>Hi Eman</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transition Page</title>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+<link rel="stylesheet" href="style.css?v=999">
 
-body{
-    height:100vh;
-    overflow:hidden;
-    background: radial-gradient(circle at top, #3d1b5a 0%, #16001f 60%, #0b0012 100%);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
-}
-
-/* 🌌 Sky */
-.sky{
-    position:absolute;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    z-index:0;
-}
-
-/* ✨ Real glowing stars */
-.star{
-    position:absolute;
-    width:3px;
-    height:3px;
-    background:white;
-    border-radius:50%;
-    box-shadow:
-        0 0 6px rgba(255,255,255,0.9),
-        0 0 12px rgba(255,255,255,0.6),
-        0 0 20px rgba(255,200,255,0.4);
-    animation: twinkle 3s infinite ease-in-out;
-    opacity:0.8;
-}
-
-@keyframes twinkle{
-    0%{opacity:0.3; transform:scale(0.8);}
-    50%{opacity:1; transform:scale(1.4);}
-    100%{opacity:0.3; transform:scale(0.8);}
-}
-
-/* 💜 Ambient glow */
-.glow1{
-    position:absolute;
-    width:500px;
-    height:500px;
-    background: radial-gradient(circle, rgba(255,120,180,0.15), transparent 70%);
-    filter: blur(60px);
-    animation: float1 18s infinite alternate ease-in-out;
-}
-
-.glow2{
-    position:absolute;
-    width:600px;
-    height:600px;
-    background: radial-gradient(circle, rgba(160,120,255,0.15), transparent 70%);
-    filter: blur(80px);
-    animation: float2 22s infinite alternate ease-in-out;
-}
-
-@keyframes float1{
-    from{transform:translate(-100px,-80px);}
-    to{transform:translate(120px,90px);}
-}
-
-@keyframes float2{
-    from{transform:translate(100px,80px);}
-    to{transform:translate(-120px,-90px);}
-}
-
-/* 🌸 Main container */
-.container{
-    z-index:5;
-    text-align:center;
-    max-width:90%;
-    animation: fadeIn 2s ease;
-}
-
-h1{
-    font-size:3.4rem;
-    letter-spacing:1px;
-    background: linear-gradient(90deg,#ffd1ec,#ff7bbd,#ffb3d9);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    margin-bottom:15px;
-}
-
-p{
-    font-size:1.15rem;
-    opacity:0.9;
-    margin:6px 0;
-}
-
-/* 🎀 Button */
-.btn{
-    margin-top:30px;
-    padding:14px 42px;
-    border-radius:50px;
-    border:none;
-    background: linear-gradient(135deg,#ff86c8,#ff4f9a);
-    color:#2a0018;
-    font-size:1.1rem;
-    cursor:pointer;
-    display:inline-flex;
-    align-items:center;
-    gap:12px;
-    box-shadow:0 12px 30px rgba(255,100,170,0.4);
-    transition:0.4s ease;
-}
-
-.btn:hover{
-    transform:translateY(-3px) scale(1.04);
-    box-shadow:0 18px 45px rgba(255,100,170,0.6);
-}
-
-/* 🐱 Cute glow icon */
-.icon{
-    width:22px;
-    height:22px;
-    filter: drop-shadow(0 0 6px rgba(255,255,255,0.7));
-}
-
-/* ✨ Animations */
-@keyframes fadeIn{
-    from{opacity:0; transform:translateY(25px);}
-    to{opacity:1; transform:translateY(0);}
-}
-</style>
 </head>
-
 <body>
 
-<div class="sky" id="sky"></div>
-<div class="glow1"></div>
-<div class="glow2"></div>
-
-<div class="container">
-    <h1>Hi Eman!</h1>
-    <p>Got a surprise for you ✨</p>
-    <p>Wanna see a surprise?</p>
-
-    <button class="btn" onclick="goNext()">
-        <svg class="icon" viewBox="0 0 24 24" fill="none">
-            <path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.65-7 10-7 10z" fill="#fff"/>
-        </svg>
-        Tap Me
-    </button>
+<div class="center">
+    <button id="tapBtn">Tap me 💗</button>
+    <div id="textBox"></div>
 </div>
 
 <script>
-/* 🌠 Real star generator */
-const sky = document.getElementById('sky');
-for(let i=0;i<140;i++){
-    const s = document.createElement('div');
-    s.className = 'star';
-    s.style.top = Math.random()*100 + '%';
-    s.style.left = Math.random()*100 + '%';
-    s.style.animationDuration = (2 + Math.random()*4) + 's';
-    s.style.opacity = Math.random();
-    sky.appendChild(s);
-}
+let step = 0;
+const btn = document.getElementById("tapBtn");
+const text = document.getElementById("textBox");
 
-/* Navigation */
-function goNext(){
-    document.body.style.transition = "opacity 0.8s ease";
-    document.body.style.opacity = "0";
-    setTimeout(()=>{
+btn.onclick = () => {
+    if(step === 0){
+        text.innerText = "your tap feels good 💖\nTap again";
+        text.className = "fade";
+        step++;
+    } else if(step === 1){
+        text.innerText = "yummy 😋\nOne more tap 💕";
+        text.className = "fade";
+        step++;
+    } else {
         window.location.href = "poem.html";
-    },800);
-}
+    }
+};
 </script>
 
 </body>
 </html>
-
-
-
-
