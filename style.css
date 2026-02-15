@@ -5,9 +5,10 @@
 /* Font Loader */
 @font-face {
     font-family: "RUNE";
-    src: url("Runethia.otf") format("opentype");
+    src: url("./Runethia.otf") format("opentype");
 }
-*{
+
+html,body,*{
     font-family: "RUNE" !important;
 }
 /* Root */
