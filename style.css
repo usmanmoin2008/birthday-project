@@ -4,10 +4,9 @@
 
 /* Font Loader */
 @font-face {
-    font-family: "Runethia";
+    font-family: "RunethiaCustom";
     src: url("./Runethia.otf") format("opentype");
-    font-weight: normal;
-    font-style: normal;
+    font-display: swap;
 }
 
 /* Root */
@@ -20,7 +19,7 @@
 html, body {
     width: 100%;
     height: 100%;
-    font-family: "Runethia", cursive;
+    font-family: "RunethiaCustom", cursive;
     overflow-x: hidden;
     background: radial-gradient(circle at top, #3b1366, #1a062b);
 }
@@ -69,7 +68,7 @@ body::before {
     cursor: pointer;
     backdrop-filter: blur(10px);
     transition: all .5s ease;
-    font-family: "Runethia", cursive;
+    font-family: "RunethiaCustom", cursive;
 }
 
 .btn:hover {
